@@ -5,16 +5,17 @@
  * @license          GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  */
 
-if(!function_exists('mb_strlen'))
-    exit('Please install the "mbstring" PHP module.');
+if (!function_exists('mb_strlen')) {
+    exit('Please install "mbstring" PHP module.');
+}
 
 require 'inc/functions.php';
 
-$sText = (isset($_POST['characters'])) ? $_POST['characters'] : '';
+$sText = isset($_POST['characters']) ? $_POST['characters'] : '';
 
 $iText = mb_strlen($sText, PH7_ENCODING);
-$iTextWithoutSpace =  mb_strlen(strip_spaces($sText), PH7_ENCODING);
-$iSpace = ($iText-$iTextWithoutSpace);
+$iTextWithoutSpace = mb_strlen(strip_spaces($sText), PH7_ENCODING);
+$iSpace = ($iText - $iTextWithoutSpace);
 $iWord = str_word_count($sText);
 $iSentence = sentence_count($sText);
 $aReadingTime = reading_time($sText);
