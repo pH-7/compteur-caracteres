@@ -12,18 +12,20 @@ define('PH7_ENCODING', 'utf-8');
  * Remove spaces in text.
  *
  * @param string $sText
- * @return integer
+ *
+ * @return int
  */
 function strip_spaces($sText)
 {
-    return str_replace(array("\r\n","\r","\s","\t","\n","\s\r\n\t",' ','  ','   ','    ','     ','      '), '', $sText);
+    return str_replace(["\r\n", "\r", "\s", "\t", "\n", "\s\r\n\t", ' ', '  ', '   ', '    ', '     ', '      '], '', $sText);
 }
 
 /**
  * Count the number of sentences.
  *
  * @param string $sText
- * @return integer
+ *
+ * @return int
  */
 function sentence_count($sText)
 {
@@ -34,7 +36,8 @@ function sentence_count($sText)
  * Calculate the reading time of text.
  *
  * @param string $sText
- * @param string $iWordPerMin Word per minute. Default: 190
+ * @param int $iWordPerMin Word per minute.
+ *
  * @return array ['min' => INTEGER, 'sec' => INTEGER]
  */
 function reading_time($sText, $iWordPerMin = 190)
@@ -42,7 +45,7 @@ function reading_time($sText, $iWordPerMin = 190)
     $sText = str_word_count(strip_tags($sText));
     $iMin = floor($sText / $iWordPerMin);
     $iSec = floor($sText % $iWordPerMin / ($iWordPerMin / 60));
-    return array('min' => $iMin, 'sec' => $iSec);
+    return ['min' => $iMin, 'sec' => $iSec];
 }
 
 /**
@@ -55,7 +58,9 @@ function t()
 {
     //$sToken = gettext($sToken); // We don't yet have the translation mode
     $sToken = func_get_arg(0);
-    for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++)
-        $sToken = str_replace('%'. ($i-1) . '%', func_get_arg($i), $sToken);
+    for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++) {
+        $sToken = str_replace('%' . ($i - 1) . '%', func_get_arg($i), $sToken);
+    }
+
     return $sToken;
 }
